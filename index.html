@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+
+<script src="Scripts/d3.min.js"></script>
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="Scripts/jquery.tipsy.js"></script>
+<script type="text/javascript" src="Scripts/index.js"></script>
+
+<link href="Styles/tipsy.css" rel="stylesheet" type="text/css" />
+<link href="Styles/MyStyles.css" rel="stylesheet" type="text/css" />
+<h1>Holden2000</h1>
+
+</head>
+
+<body>
+ <div class="inline-block">
+   <h2>Maps</h2>
+   <a href="Choropleth1.html">Choropleth1</a>
+    <br/><a href="scratch3.html">scratch3</a>
+    <br/><a href="USMap1.html">USMap1</a>
+</div>
+ <div class="inline-block">
+   <h2>Graphs</h2>
+   <a href="scratch2.html">scratch2</a>
+   <br/>
+   <br/>
+</div>
+ <div class="inline-block">
+   <h2>D3 Excercises</h2>
+   <a href="ForceDrag.html">ForceDrag</a>
+   <br/><a href="dragrectorig.html">Original RectDrag</a>
+   <br/><a href="RectDrag1.html">RectDrag1</a>
+   <br/><a href="scratch2.html">scratch2</a>
+   </div>
+ <div class="inline-block">
+   <h2>Etc.</h2>
+    <a href="index.jsp">Original Home page</a>
+    <br/><a href="index.html">Home Page</a>
+    <br/>
+    <br/>
+    <br/>
+   </div>
+ 
+ <br/>
+ <br/>
+ <hr/>
+<div id="chart"></div>
+
+<script type="text/javascript">
+
+var w = 1200, h = 600;
+var colors = d3.scale.category20();
+
+var vis = d3.select("#chart").append("svg:svg")
+.attr("width", w)
+.attr("height", h)
+
+var data = d3.range(50).map(function(i) {
+                            return { i:i, x:(Math.random()*w).toFixed(1), y:(Math.random()*h).toFixed(0), r:(Math.random()*30)+5 }
+                            });
+                            
+                            
+                            var tooltip = d3.select("body")
+                            .append("div")
+                            .attr("class", "tooltip")
+                            .style("position", "absolute")
+                            .style("z-index", "10")
+                            .style("visibility", "hidden");
+                            
+                            var maketip = function(d) {
+                                var tip = '\n' + d.x + "\nHi </br>" + d.y + '</p>';
+                                return tip;
+                            }
+
+
+//.text("a simple tooltip");
+//"YOW!</p> X = " + d.x + " - " + "Y = " + d.y
+
+vis.selectAll("circle")
+        .data(data).enter().append("svg:circle")
+        .attr("stroke", "black")
+        .attr("fill", function(d, i) { return colors((d.r/3).toFixed(0) + 1); })    //color by radius
+        //.attr("fill", function(d, i) { return colors(i); })
+        .attr("cx", function(d, i) { return d.x; })
+        .attr("cy", function(d, i) { return d.y; })
+        .attr("r", function(d, i) { return d.r; })
+        .on("mouseover", function(d, i){return (tooltip.style("visibility", "visible"), tooltip.text(maketip(d)));})
+        .on("mousemove", function(){return tooltip.style("top",
+        (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+
+
+
+vis.selectAll("text")
+    .data(data).enter().append("text")
+    .attr("x", function(d, i) { return d.x; })
+    .attr("y", function(d, i) { return d.y; })
+    .attr("dy", ".35em")
+    .text( function(d, i) {return d.i;})
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "10px")
+    .attr("fill", "black");
+
+
+</script>
+
+</body>
+</html>
+

@@ -6,10 +6,27 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXFileReference section */
+		5D605918204B20ED00C3CF06 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		5D605919204B20ED00C3CF06 /* META-INF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "META-INF"; sourceTree = "<group>"; };
+		5D60591A204B20ED00C3CF06 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		5D60591B204B20ED00C3CF06 /* cron.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = cron.yaml; sourceTree = "<group>"; };
+		5D60591C204B20ED00C3CF06 /* index.jsp */ = {isa = PBXFileReference; lastKnownFileType = text.html.other; path = index.jsp; sourceTree = "<group>"; };
+		5D60591D204B20ED00C3CF06 /* scheduled.jsp */ = {isa = PBXFileReference; lastKnownFileType = text.html.other; path = scheduled.jsp; sourceTree = "<group>"; };
+		5D60591E204B20ED00C3CF06 /* WEB-INF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "WEB-INF"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		5D605911204B206500C3CF06 = {
 			isa = PBXGroup;
 			children = (
+				5D60591B204B20ED00C3CF06 /* cron.yaml */,
+				5D605918204B20ED00C3CF06 /* index.html */,
+				5D60591C204B20ED00C3CF06 /* index.jsp */,
+				5D605919204B20ED00C3CF06 /* META-INF */,
+				5D60591D204B20ED00C3CF06 /* scheduled.jsp */,
+				5D60591A204B20ED00C3CF06 /* src */,
+				5D60591E204B20ED00C3CF06 /* WEB-INF */,
 			);
 			sourceTree = "<group>";
 		};
