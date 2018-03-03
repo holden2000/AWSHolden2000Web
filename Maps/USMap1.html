@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <head>
+        <title>USMap1</title>
+        
+        <script src="Scripts/uStates.js"></script> <!-- creates uStates. a function that uses a json of all the state boundaries -->
+        <script src="Scripts/Maps.js"></script>
+        <script src="Data/statepopulations.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <!-- <script src="Scripts/d3.min.js"></script> -->
+        
+        <link href="Styles/USMap1.css" rel="stylesheet" type="text/css" />
+
+        <h1>US Map 1</h1>
+        
+    </head>
+    
+    <body>
+        
+        <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+        <br/>
+        
+        <div id="tooltip"></div><!-- div to hold tooltip. -->
+        
+        <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+        
+        <script>
+            
+            function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
+                return "<h4>"+n+"</h4><table>"+     /* state name */
+                "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+                "<tr><td>Avg.</td><td>"+(d.avg)+"</td></tr>"+
+                "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+                "<tr><td>Pop.</td><td>"+(d.pop)+"</td></tr>"+
+                "</table>";
+            }
+        
+        var stateData ={};	/* Sample random data. */
+        
+        
+         
+         stateList.forEach(function(d){
+                              var low=Math.round(100*Math.random()),
+                                    mid=Math.round(50),
+                                    high=80
+                           pop = (function(d){ return statepopulations[d.Pop2017]});
+                           
+                              stateData[d]={low:d3.min([low,mid,high]),
+                                            high:d3.max([low,mid,high]),
+                                            avg:Math.round((low+mid+high)/3),
+                                            color:d3.interpolate("#ffffcc", "#000026")(low/100),
+                                            pop:pop
+                                            };
+                              });
+                  
+                  /* draw states on id #statesvg */
+        testdraw("#statesvg", stateData, tooltipHtml);
+                  // uStates.draw("#statesvg", stateData, tooltipHtml);
+                  
+        d3.select(self.frameElement).style("height", "600px");
+        
+        
+        //function getPopulation(id)
+                  
+            /* code from uStates.js */
+            // play around
+            var test={};
+                  
+            function testdraw(id, data, toolTip){
+                      function mouseOver(d){
+                          d3.select("#tooltip").transition().duration(200).style("opacity", .9);
+                          
+                          d3.select("#tooltip").html(toolTip(d.n, data[d.id]))
+                          .style("left", (d3.event.pageX) + "px")
+                          .style("top", (d3.event.pageY - 28) + "px");
+                            }
+                      
+                      function mouseOut(){
+                          d3.select("#tooltip").transition().duration(500).style("opacity", 0);
+                                    }
+                      
+                    /* part that does the drawing - need to connect to the json variables */
+                d3.select(id).selectAll(".state")
+                      .data(uStatePaths).enter().append("path")
+                      .attr("class","state")
+                      .attr("d",function(d){ return d.dd;})
+                      .style("fill",function(d){ return data[d.id].color; })
+                      .on("mouseover", mouseOver)
+                      .on("mouseout", mouseOut);
+                    }
+        this.test=test;
+        
+            </script>
+        
+    </body>
