@@ -1,8 +1,8 @@
 
-.tooltip {
+.tooltipStyle {
     border-style: solid;
     background-color: green;
-    width: 200px;
+    width: 100px;
     height:80px;
 }
 
@@ -28,7 +28,7 @@ body {
     width: 100%;
 }
 
-.right {
+.rightX {
     position: absolute;
     right: 0px;
     width: 300px;

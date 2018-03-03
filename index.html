@@ -13,9 +13,7 @@
 <link href="Styles/MyStyles.css" rel="stylesheet" type="text/css" />
 <h1>Holden2000</h1>
 
-</head>
 
-<body>
  <div class="inline-Block">
    <h2>Maps</h2>
    <a href="Maps/Choropleth1.html">Choropleth1</a>
@@ -46,15 +44,30 @@
     <br/>
    </div>
  
+</head>
+
+<body>
+ 
  <br/>
  <br/>
  <hr/>
 <div id="chart"></div>
 
+<div id="tooltip"></div><!-- div to hold tooltip. -->
+
+
 <script type="text/javascript">
 
 var w = 1200, h = 600;
 var colors = d3.scale.category20();
+
+var tooltipNew = function tooltipHtml(d){    /* function to create html content string in tooltip div. */
+    return "<b>YOW</b><table>"+     /* state name */
+    "<tr><td>X</td><td>"+(d.x)+"</td></tr>"+
+    "<tr><td>Y</td><td>"+(d.y)+"</td></tr>"+
+    "</table>";
+}
+
 
 var vis = d3.select("#chart").append("svg:svg")
 .attr("width", w)
@@ -67,13 +80,13 @@ var data = d3.range(50).map(function(i) {
                             
                             var tooltip = d3.select("body")
                             .append("div")
-                            .attr("class", "tooltip")
+                            .attr("class", "tooltipStyle")
                             .style("position", "absolute")
                             .style("z-index", "10")
                             .style("visibility", "hidden");
                             
                             var maketip = function(d) {
-                                var tip = '\n' + d.x + "\nHi </br>" + d.y + '</p>';
+                                var tip = '\n' + d.x + "\nHiYO </br>" + d.y + '</p>';
                                 return tip;
                             }
 
@@ -89,7 +102,7 @@ vis.selectAll("circle")
         .attr("cx", function(d, i) { return d.x; })
         .attr("cy", function(d, i) { return d.y; })
         .attr("r", function(d, i) { return d.r; })
-        .on("mouseover", function(d, i){return (tooltip.style("visibility", "visible"), tooltip.text(maketip(d)));})
+        .on("mouseover", function(d, i){return (tooltip.style("visibility", "visible"), tooltip.html(tooltipNew(d)));})
         .on("mousemove", function(){return tooltip.style("top",
         (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
         .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
