@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		5D095848204B34ED0006F6A7 /* D3Exercises */ = {isa = PBXFileReference; lastKnownFileType = folder; path = D3Exercises; sourceTree = "<group>"; };
 		5D605918204B20ED00C3CF06 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		5D605919204B20ED00C3CF06 /* META-INF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "META-INF"; sourceTree = "<group>"; };
 		5D60591A204B20ED00C3CF06 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
@@ -22,6 +23,7 @@
 		5D605911204B206500C3CF06 = {
 			isa = PBXGroup;
 			children = (
+				5D095848204B34ED0006F6A7 /* D3Exercises */,
 				5D605921204B2E2100C3CF06 /* Maps */,
 				5D60591B204B20ED00C3CF06 /* cron.yaml */,
 				5D605918204B20ED00C3CF06 /* index.html */,
