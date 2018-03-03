@@ -1,0 +1,36 @@
+
+.tooltip {
+    border-style: solid;
+    background-color: green;
+    width: 200px;
+    height:80px;
+}
+
+
+.inline-Block {
+    display: inline-block;
+    width: 250px;
+    height: 175px;
+    margin: 10px;
+    border: 3px solid #000;
+    vertical-align:top;
+    padding-left:  30px;
+}
+
+body {
+    margin: 20;
+    padding: 50;
+    background-color: #b0e0e6;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    background-color: #b0e0e6;
+}
