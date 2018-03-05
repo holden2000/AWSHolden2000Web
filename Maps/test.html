@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <head>
+        <title>test</title>
+        
+        <script src="Scripts/Maps.js"></script>
+        <script src="Data/statepopulations.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <!-- <script src="Scripts/d3.min.js"></script> -->
+        
+        <link href="Styles/USMap1.css" rel="stylesheet" type="text/css" />
+        
+        <h1>test</h1>
+        
+        <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+        <br/>
+    </head>
+    
+    <body>
+        <br/>
+        
+        <div id="tooltip"></div>        <!-- div to hold tooltip. -->
+        
+        <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+        
+        
+        <script>
+            
+            function tooltipHtml(n, d){    /* function to create html content string in tooltip div. */
+                return "<h4>"+n+"</h4><table>"+     /* state name */
+                "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+                "<tr><td>Avg.</td><td>"+(d.avg)+"</td></tr>"+
+                "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+                "</table>";
+            }
+        
+        var stateData ={};    /* Sample random data. */
+        
+        
+        //gets stateList from Maps.js
+        
+        stateList.forEach(function(d){
+                          var low=Math.round(100*Math.random()),
+                          mid=Math.round(50),
+                          high=80,
+                          pop = d;
+                          
+                          stateData[d]={low:d3.min([low,mid,high]),
+                          high:d3.max([low,mid,high]),
+                          avg:Math.round((low+mid+high)/3),
+                          color:d3.interpolate("#ffffcc", "#000026")(low/100),
+                          pop:pop
+                          };
+                          });
+                          
+        //***********************************************
+        
+        function toObject(arr) {
+            var rv = {};
+            var key = {};
+            for (var i = 0; i < arr.length;  ++i)
+            rv[arr[i].id] = arr[i];
+            return rv;
+        }
+        
+        asdf = toObject(statePopulations);
+        
+        
+                          var stateData2 ={};
+                          
+                           statePopulations.forEach(function(d){
+                           var low=Math.round(100*Math.random()),
+                           mid=Math.round(50),
+                           high=80,
+                           key=d.id;
+                           
+                           stateData2[d]={low:d3.min([low,mid,high]),
+                           high:d3.max([low,mid,high]),
+                           avg:Math.round((low+mid+high)/3),
+                           color:d3.interpolate("#ffffcc", "#000026")(low/100),
+                                                    xxx:key
+                           };
+                           
+                           });
+                           
+
+        
+        console.log(asdf)
+        //console.log(key)
+        console.log(toObject(statePopulations))
+        
+        //d3.select(self.frameElement).style("height", "600px");
+        
+
+        
+            </script>
+        
+    </body>
