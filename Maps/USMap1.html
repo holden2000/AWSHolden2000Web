@@ -3,7 +3,6 @@
     <head>
         <title>USMap1</title>
         
-        <script src="Scripts/uStates.js"></script> <!-- creates uStates. a function that uses a json of all the state boundaries -->
         <script src="Scripts/Maps.js"></script>
         <script src="Data/statepopulations.js"></script>
         <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -20,9 +19,10 @@
     <body>
         <br/>
         
-        <div id="tooltip"></div><!-- div to hold tooltip. -->
+        <div id="tooltip"></div>        <!-- div to hold tooltip. -->
         
         <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+        
         
         <script>
             
@@ -31,19 +31,19 @@
                 "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
                 "<tr><td>Avg.</td><td>"+(d.avg)+"</td></tr>"+
                 "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
-                "<tr><td>Pop.</td><td>"+(d.pop)+"</td></tr>"+
                 "</table>";
             }
         
         var stateData ={};	/* Sample random data. */
         
         
-         
+         //gets stateList from Maps.js
+         /*
          stateList.forEach(function(d){
                               var low=Math.round(100*Math.random()),
                                     mid=Math.round(50),
-                                    high=80
-                           pop = (function(d){ return statepopulations[d.Pop2017]});
+                                    high=80,
+                                    pop = d;
                            
                               stateData[d]={low:d3.min([low,mid,high]),
                                             high:d3.max([low,mid,high]),
@@ -52,27 +52,47 @@
                                             pop:pop
                                             };
                               });
+          */
+                //stateData ={};
+               
+                statePopulations.forEach(function(d){
+                                                var low=Math.round(100*Math.random()),
+                                                mid=Math.round(50),
+                                                high=80;
+  
+                                        stateData[d]={low:d3.min([low,mid,high]),
+                                                high:d3.max([low,mid,high]),
+                                                avg:Math.round((low+mid+high)/3),
+                                                color:d3.interpolate("#ffffcc", "#000026")(low/100)
+                                                };
+                                         
+                                         //console.log(d.id,stateData)
+                                                });
+          
                   
-                  /* draw states on id #statesvg */
-        testdraw("#statesvg", stateData, tooltipHtml);
+                  /* draw states in div id=statesvg */
+        DrawStates("#statesvg", stateData, tooltipHtml);
                   // uStates.draw("#statesvg", stateData, tooltipHtml);
                   
+       // console.log(stateData)
+        
         d3.select(self.frameElement).style("height", "600px");
         
         
         //function getPopulation(id)
-                  
-            /* code from uStates.js */
-            // play around
+        
+            
             var test={};
-                  
-            function testdraw(id, data, toolTip){
+                                //<div>,stateData, tooltipHtml
+            function DrawStates(id, data0, toolTip){
+                
                       function mouseOver(d){
                           d3.select("#tooltip").transition().duration(200).style("opacity", .9);
                           
-                          d3.select("#tooltip").html(toolTip(d.n, data[d.id]))
+                          d3.select("#tooltip").html(toolTip(d.n, data0[d]))
                           .style("left", (d3.event.pageX) + "px")
                           .style("top", (d3.event.pageY - 28) + "px");
+                         // console.log(data0[d].color)
                             }
                       
                       function mouseOut(){
@@ -81,13 +101,13 @@
                       
                     /* part that does the drawing - need to connect to the json variables */
                 d3.select(id).selectAll(".state")
-                      .data(uStatePaths).enter().append("path")
-                      .attr("class","state")
-                      .attr("d",function(d){ return d.dd;})
-                      .style("fill",function(d){ return data[d.id].color; })
+                      .data(uStatePaths).enter().append("path").attr("class","state").attr("d",function(d){ return d.dd;})
+                      .style("fill",function(d){  return data0[d].color; })
                       .on("mouseover", mouseOver)
                       .on("mouseout", mouseOut);
+                    
                     }
+        
         this.test=test;
         
             </script>
