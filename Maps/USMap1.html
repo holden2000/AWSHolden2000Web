@@ -31,6 +31,7 @@
                 "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
                 "<tr><td>Avg.</td><td>"+(d.avg)+"</td></tr>"+
                 "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+                "<tr><td>Pop</td><td>"+(d.pop2)+"</td></tr>"+
                 "</table>";
             }
         
@@ -39,7 +40,7 @@
         
          //gets stateList from Maps.js
          
-         stateList.forEach(function(d){
+       /*  stateList.forEach(function(d){
                               var low=Math.round(100*Math.random()),
                                     mid=Math.round(50),
                                     high=80,
@@ -52,37 +53,54 @@
                                             pop:pop
                                             };
                               });
-          
-                //stateData ={};
-            /*
-                statePopulations.forEach(function(d){
-                                                var low=Math.round(100*Math.random()),
-                                                mid=Math.round(50),
-                                                high=80,
-                                         key=d.id;
-  
-                                        stateData[d]={low:d3.min([low,mid,high]),
-                                                high:d3.max([low,mid,high]),
-                                                avg:Math.round((low+mid+high)/3),
-                                                color:d3.interpolate("#ffffcc", "#000026")(low/100)
-                                                };
-                                         
-                                         //console.log(d.id,stateData)
-                                                });
           */
-                  
+        
+                //*****************************************************************
+                //***********************************************
+                // this takes an array and turn it into an object and
+                // turns one of the fields into the object key
+                function toObject(arr) {
+                    var rv = {};
+                    for (var i = 0; i < arr.length;  ++i)
+                    rv[arr[i].id] = arr[i];
+                    return rv;
+                }
+        
+        objectState = toObject(statePopulations);
+        //console.log(objectState)
+        
+        var stateData2 ={};
+        
+        //creates new state object with info for color and tooltips
+        //Object.keys(objectState).forEach(function(d){
+        Object.keys(objectState).forEach(function(d){
+                                         var low=Math.round(100*Math.random()),
+                                         mid=Math.round(50),
+                                         high=80;
+                                         pop=Number(objectState[d].Pop2017);
+                                         
+                                         stateData2[d]={low:d3.min([low,mid,high]),
+                                         high:d3.max([low,mid,high]),
+                                         avg:Math.round((low+mid+high)/3),
+                                         color:d3.interpolate("#ffffcc", "#000026")(low/100),
+                                         //pop1:objectState[key].Pop2017,
+                                         pop2:pop
+                                         };
+                                         
+                                         });
+
+        //**************************************************************************
+           console.log(stateData2)
+           
                   /* draw states in div id=statesvg */
-        DrawStates("#statesvg", stateData, tooltipHtml);
+        DrawStates("#statesvg", stateData2, tooltipHtml);
                   // uStates.draw("#statesvg", stateData, tooltipHtml);
                   
-        console.log(stateData)
+        //console.log(stateData)
         
         d3.select(self.frameElement).style("height", "600px");
         
-        
-        //function getPopulation(id)
-        
-            
+  
             var test={};
                                 //<div>,stateData, tooltipHtml
             function DrawStates(id, data0, toolTip){
@@ -103,7 +121,7 @@
                     /* part that does the drawing - need to connect to the json variables */
                 d3.select(id).selectAll(".state")
                       .data(uStatePaths).enter().append("path").attr("class","state").attr("d",function(d){ return d.dd;})
-                      .style("fill",function(d){  return data0[d.id].color; })
+                      .style("fill",function(d){ return data0[d.id].color;})
                       .on("mouseover", mouseOver)
                       .on("mouseout", mouseOut);
                     

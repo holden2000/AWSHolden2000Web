@@ -55,38 +55,38 @@
                           });
                           
         //***********************************************
-        
+        // this takes an array and turn it into an object and
+        // turns one of the fields into the object key
         function toObject(arr) {
             var rv = {};
-            var key = {};
             for (var i = 0; i < arr.length;  ++i)
                 rv[arr[i].id] = arr[i];
             return rv;
         }
         
-        asdf = toObject(statePopulations);
+        objectState = toObject(statePopulations);
         
         
-                          var stateData2 ={};
+        var stateData2 ={};
                           
-        //statePopulations.forEach(function(d){
-        Object.keys(asdf).forEach(function(key){
+        //creates new state object with info for color and tooltips
+        Object.keys(objectState).forEach(function(key){
                            var low=Math.round(100*Math.random()),
                                mid=Math.round(50),
                                high=80,
-                               pop=Number(asdf[key].Pop2017);
+                               pop=Number(objectState[key].Pop2017);
                            
                            stateData2[key]={low:d3.min([low,mid,high]),
                            high:d3.max([low,mid,high]),
                            avg:Math.round((low+mid+high)/3),
                            color:d3.interpolate("#ffffcc", "#000026")(low/100),
-                                pop1:asdf[key].Pop2017,
+                                pop1:objectState[key].Pop2017,
                                   pop2:pop
                            };
-                           
+                           //console.log(stateData2)
                            });
                            
-        console.log(asdf)
+        console.log(objectState)
         console.log(stateData2)
         //console.log(toObject(statePopulations))
         
