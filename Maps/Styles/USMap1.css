@@ -2,7 +2,7 @@
 .state{
     fill: none;
     stroke: #a9a9a9;
-    stroke-width: 3;
+    stroke-width: 2;
 }
 .state:hover{
     fill-opacity:0.5;

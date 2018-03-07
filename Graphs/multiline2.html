@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-line 2</title>
+    <link rel="stylesheet" type="text/css" href="Styles/multiline2.css">
+        <script src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+        
+        <h1>MultiLine2</h1>
+        
+        <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+        <br/>
+    
+</head>
+<body>
+<div class="chart-wrapper" id="chart-line1"></div>
+
+<script type="text/javascript">
+    
+    d3.csv('Data/multiline_data2.csv', function(error, data) {
+    data.forEach(function (d) {
+        d.year = +d.year;
+        d.variableA = +d.variableA;
+        d.variableB = +d.variableB;
+        d.variableC = +d.variableC;
+        d.variableD = +d.variableD;
+    });
+
+    var chart = makeLineChart(data, 'year', {
+        'YOW! A': {column: 'variableA'},
+        'Variable B': {column: 'variableB'},
+        'Variable C': {column: 'variableC'},
+        'Variable D': {column: 'variableD'}
+    }, {xAxis: 'Years', yAxis: 'Amount'});
+    chart.bind("#chart-line1");
+    chart.render();
+
+});
+</script>
+
+<script src="Scripts/multiline2.js" charset="utf-8"></script>
+
+</body>
+</html>
