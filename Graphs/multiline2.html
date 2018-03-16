@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Multi-line 2</title>
+    <title>Multi-line2</title>
+    
     <link rel="stylesheet" type="text/css" href="Styles/multiline2.css">
+        
         <script src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+        <script src="Scripts/multiline2.js" charset="utf-8"></script>
         
         <h1>MultiLine2</h1>
         
@@ -18,17 +21,17 @@
 
 <script type="text/javascript">
     
-    var format = d3.time.format("%%%y-%m-%d");
-    //var parseDate = d3.time.format("%y-%m-%d").parse;
+    var format = d3.time.format("%Y-%m-%d");
+    //var parseDate = d3.time.format("%Y-%m-%d").parse;
     
     d3.csv('Data/Test3.csv', function(error, data) {
     data.forEach(function (d) {
                  d.date1 = d.date1;
-        d.AvgTemp = +d.AvgTemp;
-        d.Low = +d.Low;
-        d.High = +d.High;
-        //d.variableD = +d.variableD;
-                 console.log(d)
+                d.AvgTemp = +d.AvgTemp;
+                d.Low = +d.Low;
+                d.High = +d.High;
+                //d.variableD = +d.variableD;
+                         //console.log(d)
     });
 
            
@@ -44,7 +47,12 @@
 });
 </script>
 
-<script src="Scripts/multiline2.js" charset="utf-8"></script>
+
+
+
+
+
+
 <p>Multiply with: <input type="number" id="multiplyWith" value="10"></p>
     
     <button onclick="numbers.forEach(myFunction)">Try it</button>
