@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-    <style> /* set the CSS */
-        
-        .axis { font: 14px sans-serif; }
-        
-        .line {
-            fill: none;
-            stroke: black;
-            stroke-width: 2px;
-        }
+    <head>
+        <meta charset="UTF-8">
+            <title>DateExample1</title>
+            
+                <!-- load the d3.js library -->
+                <script src="https://d3js.org/d3.v4.min.js"></script>
+                
+                <h1>DateExample1</h1>
+                
+                <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+                <br/>
+                <hr/>
+                
+                <style> /* set the CSS */
+                    
+                    .axis { font: 14px sans-serif; }
+                    
+                    .line {
+                        fill: none;
+                        stroke: black;
+                        stroke-width: 2px;
+                    }
+                
+                    </style>
+    </head>
     
-        </style>
     <body>
         
-        <!-- load the d3.js library -->
-        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script>
             
             // set the dimensions and margins of the graph
             var margin = {top: 20, right: 20, bottom: 100, left: 50},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            width = 1260 - margin.left - margin.right,
+            height = 800 - margin.top - margin.bottom;
             
             // parse the date / time
-            var parseTime = d3.timeParse("%Y-%m-%d");
+            //var parseTime = d3.timeParse("%Y-%m-%d");
             
             // set the ranges
             var x = d3.scaleTime().range([0, width]);
             var y = d3.scaleLinear().range([height, 0]);
             
-            //var color = d3.scale.category10();
-            
-            // define the line
+            // define the lines
             var AvgTemp = d3.line()
             .x(function(d) { return x(d.date1); })
             .y(function(d) { return y(d.AvgTemp); });
@@ -60,21 +71,22 @@
                          
                          // format the data
                          data.forEach(function(d) {
-                                      d.date1 = parseTime(d.date1);
+                                      d.date1 = d3.timeParse("%Y-%m-%d")(d.date1);
                                       d.AvgTemp = +d.AvgTemp;
                                       d.Low =  +d.Low;
+                                      d.High = +d.High;
                                       });
                          
                          // Scale the range of the data
                          x.domain(d3.extent(data, function(d) { return d.date1; }));
-                         y.domain([0, d3.max(data, function(d) { return d.AvgTemp; })]);
+                         y.domain([d3.min(data, function(d) { return d.Low; }) -10, d3.max(data, function(d) { return d.High; }) + 10]);
                          
-
                          
-                         // Add the valueline path.
+                         // Add each line to the path.
                          svg.append("path")
                          .data([data])
                          .attr("class", "line")
+                         .style("stroke-width", "4px")
                          .attr("d", AvgTemp );
                          
                          svg.append("path")
@@ -105,6 +117,23 @@
                          svg.append("g")
                          .attr("class", "axis")
                          .call(d3.axisLeft(y));
+                         
+                         // text label for the x axis
+                         svg.append("text")
+                         .attr("transform",
+                               "translate(" + (width/2) + " ," +
+                               (height + margin.top + 20) + ")")
+                         .style("text-anchor", "middle")
+                         .text("Date");
+                         
+                         // text label for the y axis
+                         svg.append("text")
+                         .attr("transform", "rotate(-90)")
+                         .attr("y", 0 - margin.left)
+                         .attr("x",0 - (height / 2))
+                         .attr("dy", "1em")
+                         .style("text-anchor", "middle")
+                         .text("Temperature");
                          
                          });
                          
