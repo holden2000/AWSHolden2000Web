@@ -18,11 +18,12 @@
 
 <script type="text/javascript">
     
-    var format = d3.time.format("%y-%m-%d")
+    var format = d3.time.format("%%%y-%m-%d");
+    //var parseDate = d3.time.format("%y-%m-%d").parse;
     
     d3.csv('Data/Test3.csv', function(error, data) {
     data.forEach(function (d) {
-        d.date1 = +d.date1;
+                 d.date1 = d.date1;
         d.AvgTemp = +d.AvgTemp;
         d.Low = +d.Low;
         d.High = +d.High;
