@@ -10,6 +10,7 @@
         
         <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
         <br/>
+        <hr/>
     
 </head>
 <body>
@@ -17,28 +18,47 @@
 
 <script type="text/javascript">
     
-    d3.csv('Data/multiline_data2.csv', function(error, data) {
+    var format = d3.time.format("%y-%m-%d")
+    
+    d3.csv('Data/Test3.csv', function(error, data) {
     data.forEach(function (d) {
-        d.year = +d.year;
-        d.variableA = +d.variableA;
-        d.variableB = +d.variableB;
-        d.variableC = +d.variableC;
-        d.variableD = +d.variableD;
+        d.date1 = +d.date1;
+        d.AvgTemp = +d.AvgTemp;
+        d.Low = +d.Low;
+        d.High = +d.High;
+        //d.variableD = +d.variableD;
+                 console.log(d)
     });
 
-    var chart = makeLineChart(data, 'year', {
-        'YOW! A': {column: 'variableA'},
-        'Variable B': {column: 'variableB'},
-        'Variable C': {column: 'variableC'},
-        'Variable D': {column: 'variableD'}
-    }, {xAxis: 'Years', yAxis: 'Amount'});
+           
+    var chart = makeLineChart(data, 'date1', {
+        'Avg. Temp.': {column: 'AvgTemp'},
+        'Low': {column: 'Low'},
+        'High': {column: 'High'},
+        'Variable D': {column: 'High'}
+    }, {xAxis: 'Date', yAxis: 'Amount'});
     chart.bind("#chart-line1");
     chart.render();
-
+            
 });
 </script>
 
 <script src="Scripts/multiline2.js" charset="utf-8"></script>
-
+<p>Multiply with: <input type="number" id="multiplyWith" value="10"></p>
+    
+    <button onclick="numbers.forEach(myFunction)">Try it</button>
+    
+    <p>
+    Updated array: <span id="demo"></span>
+    </p>
+    <script>
+        var numbers = [65, 44, 12, 4];
+        
+        function myFunction(item, index, arr) {
+            var results = [];
+            arr[index] = item * document.getElementById("multiplyWith").value;
+            demo.innerHTML = "x = <u>" + arr + "</u>";
+        }
+    </script>
 </body>
 </html>
