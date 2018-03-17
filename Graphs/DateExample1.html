@@ -4,27 +4,27 @@
         <meta charset="UTF-8">
             <title>DateExample1</title>
             
-                <!-- load the d3.js library -->
-                <script src="https://d3js.org/d3.v4.min.js"></script>
+            <!-- load the d3.js library -->
+            <script src="https://d3js.org/d3.v4.js"></script>
+            
+            <h1>DateExample1</h1>
+            
+            <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+            <br/>
+            <hr/>
+            
+            <style> /* set the CSS */
                 
-                <h1>DateExample1</h1>
+                .axis { font: 14px sans-serif; }
                 
-                <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
-                <br/>
-                <hr/>
-                
-                <style> /* set the CSS */
-                    
-                    .axis { font: 14px sans-serif; }
-                    
-                    .line {
-                        fill: none;
-                        stroke: black;
-                        stroke-width: 2px;
-                    }
-                
-                    </style>
-    </head>
+                .line {
+                    fill: none;
+                    stroke: black;
+                    stroke-width: 2px;
+                }
+            
+                </style>
+            </head>
     
     <body>
         
@@ -61,82 +61,85 @@
             var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
+            //.on("mousemove", function(){console.log( d3.mouse(this))})
+            //.on("mousemove", "testfunction")
             .append("g")
-            .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
-                  
-                  // Get the data
-                  d3.csv("Data/Test3.csv", function(error, data) {
-                         if (error) throw error;
-                         
-                         // format the data
-                         data.forEach(function(d) {
-                                      d.date1 = d3.timeParse("%Y-%m-%d")(d.date1);
-                                      d.AvgTemp = +d.AvgTemp;
-                                      d.Low =  +d.Low;
-                                      d.High = +d.High;
-                                      });
-                         
-                         // Scale the range of the data
-                         x.domain(d3.extent(data, function(d) { return d.date1; }));
-                         y.domain([d3.min(data, function(d) { return d.Low; }) -10, d3.max(data, function(d) { return d.High; }) + 10]);
-                         
-                         
-                         // Add each line to the path.
-                         svg.append("path")
-                         .data([data])
-                         .attr("class", "line")
-                         .style("stroke-width", "4px")
-                         .attr("d", AvgTemp );
-                         
-                         svg.append("path")
-                         .data([data])
-                         .attr("class", "line")
-                         .style("stroke", "blue")
-                         .attr("d", Low );
-                         
-                         svg.append("path")
-                         .data([data])
-                         .attr("class", "line")
-                         .style("stroke", "red")
-                         .attr("d", High );
-                         
-                         // Add the X Axis
-                         svg.append("g")
-                         .attr("class", "axis")
-                         .attr("transform", "translate(0," + height + ")")
-                         .call(d3.axisBottom(x)
-                               .tickFormat(d3.timeFormat("%Y-%m-%d")))
-                         .selectAll("text")
-                         .style("text-anchor", "end")
-                         .attr("dx", "-.8em")
-                         .attr("dy", ".15em")
-                         .attr("transform", "rotate(-65)");
-                         
-                         // Add the Y Axis
-                         svg.append("g")
-                         .attr("class", "axis")
-                         .call(d3.axisLeft(y));
-                         
-                         // text label for the x axis
-                         svg.append("text")
-                         .attr("transform",
-                               "translate(" + (width/2) + " ," +
-                               (height + margin.top + 20) + ")")
-                         .style("text-anchor", "middle")
-                         .text("Date");
-                         
-                         // text label for the y axis
-                         svg.append("text")
-                         .attr("transform", "rotate(-90)")
-                         .attr("y", 0 - margin.left)
-                         .attr("x",0 - (height / 2))
-                         .attr("dy", "1em")
-                         .style("text-anchor", "middle")
-                         .text("Temperature");
-                         
-                         });
-                         
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            
+            
+            // Get the data
+            d3.csv("Data/Test3.csv", function(error, data) {
+                   if (error) throw error;
+                   
+                   // put data into array to get axis scalings
+                   data.forEach(function(d) {
+                                d.date1 = d3.timeParse("%Y-%m-%d")(d.date1);
+                                d.AvgTemp = +d.AvgTemp;
+                                d.Low =  +d.Low;
+                                d.High = +d.High;
+                                });
+                   
+                   // Scale the range of the data
+                   x.domain(d3.extent(data, function(d) { return d.date1; }));
+                   y.domain([d3.min(data, function(d) { return d.Low; }) -10, d3.max(data, function(d) { return d.High; }) + 10]);
+                   
+                   
+                   // Add each line to the path.
+                   svg.append("path")
+                   .data([data])
+                   .attr("class", "line")
+                   .style("stroke-width", "4px")
+                   .attr("d", AvgTemp );
+                   
+                   svg.append("path")
+                   .data([data])
+                   .attr("class", "line")
+                   .style("stroke", "blue")
+                   .attr("d", Low );
+                   
+                   svg.append("path")
+                   .data([data])
+                   .attr("class", "line")
+                   .style("stroke", "red")
+                   .attr("d", High );
+                   
+                   // Add the X Axis
+                   svg.append("g")
+                   .attr("class", "axis")
+                   .attr("transform", "translate(0," + height + ")")
+                   .call(d3.axisBottom(x)
+                         .tickFormat(d3.timeFormat("%Y-%m-%d")))
+                   .selectAll("text")
+                   .style("text-anchor", "end")
+                   .attr("dx", "-.8em")
+                   .attr("dy", ".15em")
+                   .attr("transform", "rotate(-65)");
+                   
+                   // Add the Y Axis
+                   svg.append("g")
+                   .attr("class", "axis")
+                   .call(d3.axisLeft(y));
+                   
+                   // text label for the x axis
+                   svg.append("text")
+                   .attr("transform",
+                         "translate(" + (width/2) + " ," +
+                         (height + margin.top + 80) + ")")
+                   .style("text-anchor", "middle")
+                   .text("Date");
+                   
+                   // text label for the y axis
+                   svg.append("text")
+                   .attr("transform", "rotate(-90)")
+                   .attr("y", 0 - margin.left)
+                   .attr("x",0 - (height / 2))
+                   .attr("dy", "1em")
+                   .style("text-anchor", "middle")
+                   .text("Temperature");
+                   
+                   });
+                   
+                   function testfunction(){console.log( d3.mouse(this))};
             </script>
     </body>
-
+    
