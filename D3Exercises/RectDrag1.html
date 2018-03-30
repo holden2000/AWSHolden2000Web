@@ -1,135 +1,141 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-
-            <title>RectDrag1</title>
+    <head>
         
-
-    <body>
-
+        <title>RectDrag1</title>
+        
         <br/><a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
         <br/><a href="ForceDrag.html">ForceDrag</a>
         <br/><a href="RectDrag1.html">RectDrag1</a>
         <br/><a href="Choropleth1.html">Choropleth1</a>
+        
+        
+        <link href="Styles/StyleSheet.css" rel="stylesheet" type="text/css">
+            
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <!--<script type="text/javascript" src="/Scripts/jquery.tipsy.js"></script>-->
+            
+            
+    </head>
+    
+    
+    
+    <body>
+        
         <br/>
     </body>
-
-
-<!--sets "properties" of canvas-->
-<canvas width="1200" height="800" id="C1"></canvas>
-
-<link href="Styles/StyleSheet.css" rel="stylesheet" type="text/css">
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<!--<script type="text/javascript" src="/Scripts/jquery.tipsy.js"></script>-->
-
-
-<script>
-
-var canvas = d3.select("canvas"),
-context = canvas.node().getContext("2d"),
-width = canvas.property("width"),
-height = canvas.property("height"),
-radius = 32,
-dragBarWidth = 10;
-
-//d3.select("p").style("background-color", "white");    //this doesn't do anything
-d3.select("body").style("background-color", "#aaa");
-
-var circles = d3.range(30).map(function(i) {
-            return {
-                index: i,
-                //x: Math.round(Math.random() * (width - radius * 2) + radius),
-                x: i * 30,
-                y: Math.round(Math.random() * (height - radius * 2) + radius),
-                w: 10 * i,
-                h: 30
-                };
-            });
-
-
-
-var color = d3.scaleOrdinal()
-.range(d3.schemeCategory20);
-
-render();
-
-canvas.call(d3.drag()
-.subject(dragsubject)
-.on("start", dragstarted)
-.on("drag", dragged)
-.on("end", dragended)
-.on("start.render drag.render end.render", render));
-
-//canvas.call(d3.drag()
-//    .subject(dragresize)
-//    .on("drag", resize)
-//    .on("drag.render", render));
-
-console.log("circlelength", circles.length);
-console.log("circles", circles);
-
-
-//context = canvas.node().getContext("2d")
-function render() {
-                context.clearRect(0, 0, width, height); //cleans the slate
-                for (var i = 0, n = circles.length, circle; i < n; ++i) {
-                    circle = circles[i];
-                    context.beginPath();
-                    context.moveTo(circle.x + 0, circle.y);
-                    context.strokeRect(circle.x, circle.y, circle.w, circle.h);
-                    context.fillRect(circle.x, circle.y, circle.w, circle.h);
-                    //context.arc(circle.x, circle.y, radius, 0, 1.5 * Math.PI);
-                    var dragBar = context.strokeRect(circle.x + circle.w - dragBarWidth/2, circle.y + 2, dragBarWidth, circle.h -4);  //right dragbar
-                
-                    context.fillStyle = color(circle.index);
-                    context.fill();
-                    if (circle.active) {
-                    context.lineWidth = 4;
-                    context.strokeRect(circle.x, circle.y, circle.w, circle.h);
-                    }
-                }
-                }
-
-//finds object to be dragged
-function dragsubject() {
-for (var i = circles.length - 1, circle, x, y; i >= 0; --i) {
-circle = circles[i];
-x = Math.abs( (circle.x + circle.w/2 - dragBarWidth/2) - d3.event.x);
-//x = Math.abs((circle.x + circle.w) - d3.event.x);
-y = Math.abs( (circle.y + circle.h/2) - d3.event.y);
-if (x < circle.w/2 && y < circle.h/2) return circle;
-//if (x < dragBarWidth / 2 && y < circle.h / 2) return circle;
-}
-}
-
-function resize() {
-d3.event.subject.w = d3.event.x - d3.event.subject.x;
-}
-
-function dragstarted() {
-circles.splice(circles.indexOf(d3.event.subject), 1);
-circles.push(d3.event.subject);
-d3.event.subject.active = true;
-}
-
-function dragged() {
-d3.event.subject.x = d3.event.x;
-d3.event.subject.y = d3.event.y;
-}
-
-function dragended() {
-d3.event.subject.active = false;
-}
-
-function dragresize() {
-for (var i = circles.length - 1, circle, x, y; i >= 0; --i) {
-circle = circles[i];
-x = Math.abs((circle.x + circle.w) - d3.event.x);
-y = Math.abs((circle.y + circle.h / 2) - d3.event.y);
-if (x < dragBarWidth/ 2 && y < circle.h / 2) return circle;
-}
-}
-
-</script>
-
-
+    
+    
+    <!--sets "properties" of canvas-->
+    <canvas width="1200" height="800" id="C1"></canvas>
+        
+        <script>
+            
+            var canvas = d3.select("canvas"),
+            context = canvas.node().getContext("2d"),
+            width = canvas.property("width"),
+            height = canvas.property("height"),
+            radius = 32,
+            dragBarWidth = 10;
+            
+            //d3.select("p").style("background-color", "white");    //this doesn't do anything
+            d3.select("body").style("background-color", "#aaa");
+            
+            var bars = d3.range(30).map(function(i) {
+                                           return {
+                                           index: i,
+                                           //x: Math.round(Math.random() * (width - radius * 2) + radius),
+                                           x: i * 30,
+                                           y: Math.round(Math.random() * (height - radius * 2) + radius),
+                                           w: 10 * i,
+                                           h: 20
+                                           };
+                                           });
+                                           
+                                           
+                                           
+                                           var color = d3.scaleOrdinal()
+                                           .range(d3.schemeCategory20);
+                                           
+                                           render();
+                                           
+                                           canvas.call(d3.drag()
+                                                       .subject(dragsubject)
+                                                       .on("start", dragstarted)
+                                                       .on("drag", dragged)
+                                                       .on("end", dragended)
+                                                       .on("start.render drag.render end.render", render));
+                                                       
+                                                       //canvas.call(d3.drag()
+                                                       //    .subject(dragresize)
+                                                       //    .on("drag", resize)
+                                                       //    .on("drag.render", render));
+                                                       
+                                                       //console.log("barlength", bar.length);
+                                                       console.log("bars", bars);
+                                                       
+                                                       
+                                                       //context = canvas.node().getContext("2d")
+                                                       function render() {
+                                                           context.clearRect(0, 0, width, height); //cleans the slate
+                                                           for (var i = 0, n = bars.length, bar; i < n; ++i) {
+                                                               bar = bars[i];
+                                                               context.beginPath();
+                                                               context.moveTo(bar.x + 0, bar.y);
+                                                               context.strokeRect(bar.x, bar.y, bar.w, bar.h);
+                                                               context.fillRect(bar.x, bar.y, bar.w, bar.h);
+                                                               //context.arc(circle.x, circle.y, radius, 0, 1.5 * Math.PI);
+                                                               var dragBar = context.strokeRect(bar.x + bar.w - dragBarWidth/2, bar.y + 2, dragBarWidth, bar.h -4);  //right dragbar
+                                                               
+                                                               context.fillStyle = color(bar.index);
+                                                               context.fill();
+                                                               if (bar.active) {
+                                                                   context.lineWidth = 4;
+                                                                   context.strokeRect(bar.x, bar.y, bar.w, bar.h);
+                                                               }
+                                                           }
+                                                       }
+        
+        //finds object to be dragged
+        function dragsubject() {
+            for (var i = bars.length - 1, bar, x, y; i >= 0; --i) {
+                bar = bars[i];
+                x = Math.abs( (bar.x + bar.w/2 - dragBarWidth/2) - d3.event.x);
+                //x = Math.abs((circle.x + circle.w) - d3.event.x);
+                y = Math.abs( (bar.y + bar.h/2) - d3.event.y);
+                if (x < bar.w/2 && y < bar.h/2) return bar;
+                //if (x < dragBarWidth / 2 && y < circle.h / 2) return circle;
+            }
+        }
+        
+        function resize() {
+            d3.event.subject.w = d3.event.x - d3.event.subject.x;
+        }
+        
+        function dragstarted() {
+            bars.splice(bars.indexOf(d3.event.subject), 1);
+            bars.push(d3.event.subject);
+            d3.event.subject.active = true;
+        }
+        
+        function dragged() {
+            d3.event.subject.x = d3.event.x;
+            d3.event.subject.y = d3.event.y;
+        }
+        
+        function dragended() {
+            d3.event.subject.active = false;
+        }
+        
+        function dragresize() {
+            for (var i = bars.length - 1, bar, x, y; i >= 0; --i) {
+                bar = bars[i];
+                x = Math.abs((bar.x + bar.w) - d3.event.x);
+                y = Math.abs((bar.y + bar.h / 2) - d3.event.y);
+                if (x < dragBarWidth/ 2 && y < bar.h / 2) return bar;
+            }
+        }
+        
+            </script>
+        
+        

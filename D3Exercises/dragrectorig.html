@@ -10,7 +10,7 @@
     
     <style type="text/css">
         svg {
-          border: solid 1px #aaa;
+            border: solid 2px #000;
         }
 
         #checks {
@@ -38,6 +38,9 @@
                 <option value="audi">Audi</option>
             </select>
     </div>
+    <div id="test">
+        this is a test
+    </div>
 
     <script>
         d3.select("body").transition()
@@ -45,21 +48,6 @@
         d3.select("div").style("background-color", "#edd");
         
 
-        //for whatever reason, this block prints out the data array and can be removed
-        // Update…
-        var p = d3.select("body")
-        .selectAll("p")
-        .data([4, 8, 15, 16, 23, 42])
-        .text(function(d) { return d; });
-        
-        // Enter…
-        p.enter().append("p")
-        .text(function(d) { return d; });
-        
-        // Exit…
-        p.exit().remove();
-        
-        //***********************************
      
 $('#xChecked').click(function() {
     isXChecked = !isXChecked;   //set checkbox to new state

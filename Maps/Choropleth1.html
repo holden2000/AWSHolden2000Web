@@ -22,7 +22,7 @@
 
 <svg width="1200" height="900"></svg>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>   <!--basic d3 librarty-->
+<script src="https://d3js.org/d3.v4.min.js"></script>   <!--basic d3 library-->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script> <!--map-->
 
@@ -97,7 +97,7 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.rate = unemployment.get(d.id)); }) //fill county based on unemployment rate
       .attr("d", path)
     .append("title")    //hover text
-      .text(function(d) { return d.rate + "% \nYOW!!!" + d.id; });
+      .text(function(d) { return d.rate + "% \nYOW!!! " + d.id; });
 
 //adds state boundries to map
   svg.append("path")

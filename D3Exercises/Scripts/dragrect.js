@@ -1,10 +1,11 @@
+//window size
 var w = 1200,
-    h = 550,
-    r = 120;   //not sure this is used
+    h = 550;
 
 var isXChecked = true,
     isYChecked = true;
 
+//rect size
 var width = 300,
     height = 200,
     dragbarw = 20;
@@ -12,6 +13,10 @@ var width = 300,
 var drag = d3.drag()
     .subject(Object)
     .on("drag", dragmove);
+
+var drag2 = d3.drag()
+.subject(Object)
+.on("drag", testDrag);
 
 var dragright = d3.drag()
     .subject(Object)
@@ -35,7 +40,20 @@ var svg = d3.select("body").append("svg")
     .style("background-color", "#ddd")
 
 var newg = svg.append("g")
-      .data([{x: width / 2, y: height / 2}]);
+      .data([{x: width / 3, y: height / 2}]);
+
+var newg2 = svg.append("g")
+.data([{x: width / 1, y: height / 2}]);
+
+var testrect = newg2.append("rect")
+        .attr("x", 450)
+        .attr("y", function(d) { return d.y; })
+        .attr("height", height)
+        .attr("width", width)
+        .attr("fill-opacity", .5)
+        .attr("cursor", "move")
+        .call(drag2);
+
 
 var dragrect = newg.append("rect")
       .attr("id", "active")
@@ -90,6 +108,13 @@ var dragbarbottom = newg.append("rect")
       .attr("fill-opacity", .5)
       .attr("cursor", "ns-resize")
       .call(dragbottom);
+
+function testDrag(d) {
+            testrect
+                  .attr("x", d.x = Math.max(0, Math.min(w - width, d3.event.x)))
+             .attr("y", d.y = Math.max(0, Math.min(h - height, d3.event.y)));
+        }
+
 
 function dragmove(d) {
   if (isXChecked) {
