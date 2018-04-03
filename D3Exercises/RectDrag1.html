@@ -38,17 +38,16 @@
             radius = 32,
             dragBarWidth = 10;
             
-            //d3.select("p").style("background-color", "white");    //this doesn't do anything
             d3.select("body").style("background-color", "#aaa");
             
-            var bars = d3.range(30).map(function(i) {
+            var bars = d3.range(20).map(function(i) {
                                            return {
                                            index: i,
                                            //x: Math.round(Math.random() * (width - radius * 2) + radius),
-                                           x: i * 30,
+                                           x: i * 40,
                                            y: Math.round(Math.random() * (height - radius * 2) + radius),
-                                           w: 10 * i,
-                                           h: 20
+                                           w: 60,
+                                           h: 40
                                            };
                                            });
                                            
@@ -84,15 +83,16 @@
                                                                context.moveTo(bar.x + 0, bar.y);
                                                                context.strokeRect(bar.x, bar.y, bar.w, bar.h);
                                                                context.fillRect(bar.x, bar.y, bar.w, bar.h);
-                                                               //context.arc(circle.x, circle.y, radius, 0, 1.5 * Math.PI);
-                                                               var dragBar = context.strokeRect(bar.x + bar.w - dragBarWidth/2, bar.y + 2, dragBarWidth, bar.h -4);  //right dragbar
-                                                               
                                                                context.fillStyle = color(bar.index);
-                                                               context.fill();
-                                                               if (bar.active) {
-                                                                   context.lineWidth = 4;
-                                                                   context.strokeRect(bar.x, bar.y, bar.w, bar.h);
-                                                               }
+
+                                                               //var dragBar = context.strokeRect(bar.x + bar.w - dragBarWidth/2, bar.y + 2, dragBarWidth, bar.h -4);  //right dragbar
+                                                               
+                                                               //
+                                                              // context.fill();
+                                                               //if (bar.active) {
+                                                                //   context.lineWidth = 4;
+                                                                 //  context.strokeRect(bar.x, bar.y, bar.w, bar.h);
+                                                               //}
                                                            }
                                                        }
         
@@ -100,11 +100,10 @@
         function dragsubject() {
             for (var i = bars.length - 1, bar, x, y; i >= 0; --i) {
                 bar = bars[i];
-                x = Math.abs( (bar.x + bar.w/2 - dragBarWidth/2) - d3.event.x);
-                //x = Math.abs((circle.x + circle.w) - d3.event.x);
-                y = Math.abs( (bar.y + bar.h/2) - d3.event.y);
-                if (x < bar.w/2 && y < bar.h/2) return bar;
-                //if (x < dragBarWidth / 2 && y < circle.h / 2) return circle;
+                x = Math.abs( (bar.x + bar.w/2) - d3.event.x);
+                y = Math.abs( (bar.y + bar.h/2) - (d3.event.y - bar.h*2));
+                if ( x < bar.w/2 && y < bar.h/2 ) return bar;
+               
             }
         }
         
@@ -113,8 +112,8 @@
         }
         
         function dragstarted() {
-            bars.splice(bars.indexOf(d3.event.subject), 1);
-            bars.push(d3.event.subject);
+            //bars.splice(bars.indexOf(d3.event.subject), 1);
+            //bars.push(d3.event.subject);
             d3.event.subject.active = true;
         }
         
