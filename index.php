@@ -17,6 +17,7 @@
         <?php
             echo "Hello World!";
             ?>
+
         <div class="inline-Block">
             <h2>Maps</h2>
             <a href="Maps/Choropleth1.html">Choropleth1</a>
@@ -121,9 +122,7 @@
                                                                                      
                                                                                      
             </script>
-        <form action="HelloWorld.php">
-            <input type="submit" value="click on me!">
-        </form>
+        
     </body>
 </html>
 

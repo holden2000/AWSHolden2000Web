@@ -17,6 +17,8 @@
 		5D60591E204B20ED00C3CF06 /* WEB-INF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "WEB-INF"; sourceTree = "<group>"; };
 		5D605920204B248C00C3CF06 /* Styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Styles; sourceTree = "<group>"; };
 		5D605921204B2E2100C3CF06 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
+		5D7F99F920780CFA002D0602 /* index.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = index.php; sourceTree = "<group>"; };
+		5D7F99FA20780FD1002D0602 /* HelloWorld.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = HelloWorld.php; sourceTree = "<group>"; };
 		5DD44240204B3F3900228CC6 /* BubbleTutorial */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BubbleTutorial; sourceTree = "<group>"; };
 		5DD44241204B415400228CC6 /* Graphs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -31,6 +33,8 @@
 				5D605921204B2E2100C3CF06 /* Maps */,
 				5D60591B204B20ED00C3CF06 /* cron.yaml */,
 				5D605918204B20ED00C3CF06 /* index.html */,
+				5D7F99F920780CFA002D0602 /* index.php */,
+				5D7F99FA20780FD1002D0602 /* HelloWorld.php */,
 				5D60591C204B20ED00C3CF06 /* index.jsp */,
 				5D60591D204B20ED00C3CF06 /* scheduled.jsp */,
 				5D605919204B20ED00C3CF06 /* META-INF */,

@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
+      
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+      
+      <style type="text/css">
+          svg {
+              border: solid 2px #000;
+          }
+      
+      #checks {
+          margin: 50px;
+      }
+      </style>
+      
       <br/><a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
       </br>
       </br>
       
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    
-    
-    <style type="text/css">
-        svg {
-            border: solid 2px #000;
-        }
-
-        #checks {
-          margin: 50px;
-        }
-    </style>
        <h2>This is a test </h2>
+       
   </head>
   
   <body>
-
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script type="text/javascript" src="Scripts/dragrect.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    
- 
+      <script type="text/javascript" src="Scripts/dragrect.js"></script>
+     
     <div id="checks">
     	X-axis:<input type="checkbox" id="xChecked" checked/>
     	Y-axis:<input type="checkbox" id="yChecked" checked/>
@@ -38,39 +39,41 @@
                 <option value="audi">Audi</option>
             </select>
     </div>
+    
     <div id="test">
         this is a test
     </div>
 
-    <script>
-        d3.select("body").transition()
-            .style("background-color", "#aaa");
-        d3.select("div").style("background-color", "#edd");
-        
-
-     
-$('#xChecked').click(function() {
-    isXChecked = !isXChecked;   //set checkbox to new state
-     dragbarleft 
-        .attr("fill-opacity", (isXChecked ? 0.5 : 0))
-        .attr("cursor", (isXChecked ? "ew-resize" : "move"));
-     dragbarright 
-        .attr("fill-opacity", (isXChecked ? 0.5 : 0))
-        .attr("cursor", (isXChecked ? "ew-resize" : "move"));
-});
-
-$('#yChecked').click(function() {
-    isYChecked = !isYChecked;
-     dragbartop 
-        .attr("fill-opacity", (isYChecked ? 0.5 : 0))
-        .attr("cursor", (isYChecked ? "ns-resize" : "move"));
-     dragbarbottom 
-        .attr("fill-opacity", (isYChecked ? 0.5 : 0))
-        .attr("cursor", (isYChecked ? "ns-resize" : "move"));
-});
-    </script>
-
-    <p>asd</p>
-    <p>asd</p>
   </body>
+  
+  <script>
+      
+      d3.select("body").transition()
+      .style("background-color", "#aaa");
+      d3.select("div").style("background-color", "#edd");
+      
+      
+      
+      $('#xChecked').click(function() {
+                           isXChecked = !isXChecked;   //set checkbox to new state
+                           dragbarleft
+                           .attr("fill-opacity", (isXChecked ? 0.5 : 0))
+                           .attr("cursor", (isXChecked ? "ew-resize" : "move"));
+                           dragbarright
+                           .attr("fill-opacity", (isXChecked ? 0.5 : 0))
+                           .attr("cursor", (isXChecked ? "ew-resize" : "move"));
+                           });
+                           
+                           $('#yChecked').click(function() {
+                                                isYChecked = !isYChecked;
+                                                dragbartop
+                                                .attr("fill-opacity", (isYChecked ? 0.5 : 0))
+                                                .attr("cursor", (isYChecked ? "ns-resize" : "move"));
+                                                dragbarbottom
+                                                .attr("fill-opacity", (isYChecked ? 0.5 : 0))
+                                                .attr("cursor", (isYChecked ? "ns-resize" : "move"));
+                                                });
+                                                
+      </script>
+  
 </html>
