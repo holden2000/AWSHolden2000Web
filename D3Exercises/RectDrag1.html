@@ -36,11 +36,14 @@
             width = canvas.property("width"),
             height = canvas.property("height"),
             radius = 32,
-            dragBarWidth = 10;
+            dragBarWidth = 10,
+            h0 = 45,
+            w0 = 60;
+            
             
             d3.select("body").style("background-color", "#aaa");
             
-            var bars = d3.range(20).map(function(i) {
+            var bars1 = d3.range(20).map(function(i) {
                                            return {
                                            index: i,
                                            //x: Math.round(Math.random() * (width - radius * 2) + radius),
@@ -50,6 +53,12 @@
                                            h: 40
                                            };
                                            });
+                                           
+                                           var bars = [{index: 0, x: 0, y: 400, w: w0, h: h0},
+                                           {index: 1, x: 61, y: 400, w: 60, h: h0},
+                                                       {index: 2, x: 121, y: 400, w: 60, h: h0},
+                                                       {index: 3, x: 0, y: 200, w: 60, h: h0},
+                                                       {index: 4, x: 62, y: 200, w: 60, h: h0}];
                                            
                                            
                                            
@@ -81,7 +90,7 @@
                                                                bar = bars[i];
                                                                context.beginPath();
                                                                context.moveTo(bar.x + 0, bar.y);
-                                                               context.strokeRect(bar.x, bar.y, bar.w, bar.h);
+                                                               context.strokeRect(bar.x, bar.y, bar.w, h0);
                                                                context.fillRect(bar.x, bar.y, bar.w, bar.h);
                                                                context.fillStyle = color(bar.index);
 

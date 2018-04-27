@@ -26,17 +26,17 @@
                 </style>
             </head>
     
+    <div id='tooltip' style='position:absolute;background-color:lightgray;padding:5px'></div>
+    
     <body>
-        
+      
+      
         <script>
             
             // set the dimensions and margins of the graph
             var margin = {top: 20, right: 20, bottom: 100, left: 50},
             width = 1260 - margin.left - margin.right,
             height = 800 - margin.top - margin.bottom;
-            
-            // parse the date / time
-            //var parseTime = d3.timeParse("%Y-%m-%d");
             
             // set the ranges
             var x = d3.scaleTime().range([0, width]);
@@ -55,9 +55,12 @@
             .x(function(d) { return x(d.date1); })
             .y(function(d) { return y(d.High); });
             
+            
             // append the svg obgect to the body of the page
             // appends a 'group' element to 'svg'
             // moves the 'group' element to the top left margin
+            
+            //CHART******************************************************************
             var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
