@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-    
-    <head>
-       <title>Simple Graph</title>
-        <script src="https://d3js.org/d3.v4.js"></script>
-        <h1>Simple Graph</h1>
-        <a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
-        <br/>
-        <hr/>
-    </head>
-    
-    
-    
-    
-    
 
+<title>Simple Graph</title>
+<h1>Simple Graph</h1>
+
+<a href="http://holden2000web-env.qpcuadhzxs.us-east-1.elasticbeanstalk.com">Home Page</a>
+<br/>
+<hr/>
 
 <svg width='800' height='400'></svg>
 
 <div id='tooltip' style='position:absolute;background-color:lightgray;padding:5px'></div>
 
 
-
+ <script src="https://d3js.org/d3.v4.js"></script>
 <script>
     
     // Define margins, dimensions, and some line colors
@@ -34,6 +24,8 @@
     const y = d3.scaleLinear().domain([0, 40000000]).range([height, 0]);
     const line = d3.line().x(d => x(d.year)).y(d => y(d.population));
     
+    
+    //CHART****************************************************
     const chart = d3.select('svg').append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
     
