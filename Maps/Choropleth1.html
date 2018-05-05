@@ -78,7 +78,7 @@ g.call(d3.axisBottom(x)
   .select(".domain")
     .remove();
 
-//asynchronouly loads data from web service and tsv file
+//asynchronouly loads  json data from web service and tsv file
 d3.queue()
     .defer(d3.json, "https://d3js.org/us-10m.v1.json")      //get map data
     .defer(d3.tsv, "Data/unemployment.tsv", function(d) { unemployment.set(d.id, +d.rate); })   // id, rate

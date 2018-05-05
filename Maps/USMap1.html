@@ -4,9 +4,11 @@
         <title>USMap1</title>
         
         <script src="Scripts/Maps.js"></script>
-        <script src="Data/statepopulations.js"></script>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <!-- <script src="Scripts/d3.min.js"></script> -->
+        
+        <!-- data -->
+        <script src="Data/statepopulations.js"></script>
         
         <link href="Styles/USMap1.css" rel="stylesheet" type="text/css" />
 
@@ -27,18 +29,19 @@
             
             function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
                 return "<h4>"+n+"</h4><table>"+     /* state name */
-                "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+                "<tr><td>Pop 2010: </td><td>"+(d.pop2010)+"</td></tr>"+
+                "<tr><td>Pop 2017: </td><td>"+(d.pop2017)+"</td></tr>"+
+                "<tr><td>Change: </td><td>"+(d.change)+"</td></tr>"+
                 "<tr><td>Avg.</td><td>"+(d.avg)+"</td></tr>"+
                 "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
-                "<tr><td>Pop</td><td>"+(d.pop2)+"</td></tr>"+
                 "</table>";
             }
         
-        var stateData ={};	/* Sample random data. */
+        //var stateData ={};	/* S */
                 
 
                 //***********************************************
-                // this takes an array and turn it into an object and
+                // this takes an array and turns it into an object and
                 // turns one of the fields into the object key
                 function toObject(arr) {
                     var rv = {};
@@ -55,27 +58,31 @@
         //creates new state object with info for color and tooltips
         Object.keys(objectState).forEach(function(d){
                                          var low=Math.round(100*Math.random()),
-                                         mid=Math.round(50),
-                                         high=80;
-                                         pop=Number(objectState[d].Pop2017);
+                                            mid=Math.round(50),
+                                            high=80,
+                                         pop2010=Number(objectState[d].Pop2010)
+                                         pop2017=Number(objectState[d].Pop2017);
                                          
-                                         stateData2[d]={low:d3.min([low,mid,high]),
-                                         high:d3.max([low,mid,high]),
-                                         avg:Math.round((low+mid+high)/3),
-                                         color:d3.interpolate("#0000cc", "#000026")(pop/50000000),
-                                         //pop1:objectState[key].Pop2017,
-                                         pop2:pop
-                                         };
+                                         stateData2[d]={low: d3.min([low,mid,high]),
+                                                         high: d3.max([low,mid,high]),
+                                                         avg: Math.round((low+mid+high)/3),
+                                                         //pop1:objectState[key].Pop2017,
+                                                        pop2010: (Number(objectState[d].Pop2010)/1000000).toFixed(2),
+                                                        pop2017: (pop2017/1000000).toFixed(2),
+                                                        change: ((pop2017 - pop2010)/pop2017).toFixed(2),
+                                          color: d3.interpolate ("#d73027", "#1a9850") ((20*(pop2017 - pop2010)/pop2017))
+                                         //color:d3.interpolate("#0000cc", "#000026")(pop2017/50000000)
+                                                };
                                          
                                          });
 
         //**************************************************************************
-           console.log(stateData2)
+           //console.log(stateData2)
            
                   /* draw states in div id=statesvg */
         DrawStates("#statesvg", stateData2, tooltipHtml);
         
-        //console.log(stateData)
+        //console.log(stateData2)
         
         d3.select(self.frameElement).style("height", "600px");
         
