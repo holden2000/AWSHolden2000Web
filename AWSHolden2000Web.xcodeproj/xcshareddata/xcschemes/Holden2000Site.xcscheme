@@ -11,7 +11,7 @@
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5D6ADDFE20E960C20024FE10"
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "5D6ADDFE20E960C20024FE10"
+            BuildableName = "Holden2000Site"
+            BlueprintName = "Holden2000Site"
+            ReferencedContainer = "container:AWSHolden2000Web.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

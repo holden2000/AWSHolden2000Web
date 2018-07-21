@@ -71,8 +71,8 @@
             
             
             // Get the data -Load csv file
-            d3.csv("Data/Test3.csv", function(error, data) {
-                   if (error) throw error;
+            d3.csv("Data/Test3.csv", function( data) {
+                  // if (error) throw error;
                    
                    // put data into array to get axis scalings
                    data.forEach(function(d) {

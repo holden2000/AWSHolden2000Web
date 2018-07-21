@@ -214,6 +214,7 @@ function tdragresize(d) {
   }
 }
 
+
 function bdragresize(d) {
    if (isYChecked) {
      //Max x on the left is x - width 
