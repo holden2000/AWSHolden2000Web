@@ -34,6 +34,7 @@ var dragbottom = d3.drag()
     .subject(Object)
     .on("drag", bdragresize);
 
+
 var svg = d3.select("body").append("svg")
     .attr("width", w)
     .attr("height", h)
