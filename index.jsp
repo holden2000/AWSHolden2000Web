@@ -143,6 +143,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
   }
 
   </style>
+
 </head>
 <body id="sample">
   <div class="wrapper">
