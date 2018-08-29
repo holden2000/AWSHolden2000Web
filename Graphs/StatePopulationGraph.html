@@ -12,6 +12,7 @@
 
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
+
 <script>
   
 // Define margins, dimensions, and some line colors
@@ -39,6 +40,7 @@ chart.append('text').html('State Population Over Time').attr('x', 200);
   
 // Load the data and draw a chart
 let states, tipBox;
+
 d3.json('Data/state-populations.json', d => {
   states = d;
 
