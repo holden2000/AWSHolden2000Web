@@ -1,0 +1,60 @@
+# looks like this is the comment indicator
+# MA = 25 CA = 06
+#curl 'https://www2.census.gov/geo/tiger/GENZ2014/shp/cb_2014_25_tract_500k.zip' -o cb_2014_25_tract_500k.zip
+#unzip -o cb_2014_25_tract_500k.zip
+
+cd cb_2014_25_tract_500k
+
+shp2json cb_2014_25_tract_500k.shp -o ma.json
+
+# [41.3, 42.8] latitude?
+geoproject 'd3.geoConicEqualArea().parallels([41.3, 42.8]).rotate([75, 0]).fitSize([960, 960], d)' < ma.json > ma-albers.json
+
+geo2svg -w 960 -h 960 < ma-albers.json > ma-albers.svg
+
+#
+ndjson-split 'd.features' \
+< ma-albers.json \
+> ma-albers.ndjson
+
+# set up id
+ndjson-map 'd.id = d.properties.GEOID.slice(2), d' \
+< ma-albers.ndjson \
+> ma-albers-id.ndjson
+
+#get census data
+#curl 'https://api.census.gov/data/2014/acs5?get=B01003_001E&for=tract:*&in=state:25' -o cb_2014_25_tract_B01003.json
+
+#convert to NDJASON stream
+ndjson-cat cb_2014_25_tract_B01003.json \
+| ndjson-split 'd.slice(1)' \
+| ndjson-map '{id: d[2] + d[3], B01003: +d[0]}' \
+> cb_2014_25_tract_B01003.ndjson
+
+# joinn population and geometry
+ndjson-join 'd.id' \
+ma-albers-id.ndjson \
+cb_2014_25_tract_B01003.ndjson \
+> ma-albers-join.ndjson
+
+#compute population density and remove unneeded stuff
+ndjson-map 'd[0].properties = {density: Math.floor(d[1].B01003 / d[0].properties.ALAND * 2589975.2356)}, d[0]' \
+< ma-albers-join.ndjson \
+> ma-albers-density.ndjson
+
+# To convert back to GeoJSON, use ndjson-reduce and ndjson-map:
+ndjson-reduce \
+< ma-albers-density.ndjson \
+| ndjson-map '{type: "FeatureCollection", features: d}' \
+> ma-albers-density.json
+
+#
+ndjson-map -r d3 \
+'(d.properties.fill = d3.scaleSequential(d3.interpolateViridis).domain([0, 4000])(d.properties.density), d)' \
+< ma-albers-density.ndjson \
+> ma-albers-color.ndjson
+
+# To convert the newline-delimited GeoJSON to SVG using geo2svg:
+geo2svg -n --stroke none -p 1 -w 960 -h 960 \
+< ma-albers-color.ndjson \
+> ma-albers-color.svg
