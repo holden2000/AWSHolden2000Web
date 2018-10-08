@@ -73,7 +73,7 @@ function drawTime(ctx, radius) {
 }
 
 function pad(d) { return (d < 10) ? "0" + d.toString() : d.toString(); }
-function test(d) { return (d == 0) ? "12" : d.toString(); }
+function hour12(d) { return (d == 0) ? "12" : d.toString(); }
 
 function drawHand(ctx, pos, length, width, time) {
     // var hourStr = hour.toString();
@@ -104,9 +104,9 @@ function printTime() {
 
     hour = hour % 12;
 
-    var hour2 = hour.toString() + ":" + minutes + ":" + seconds;
+    var hour2 = hour12(hour) + ":" + minutes + ":" + seconds;
     
-    console.log(test(hour) )
+    //console.log(hour12(hour) )
 
     Ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
 
