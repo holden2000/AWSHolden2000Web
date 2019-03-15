@@ -15,9 +15,11 @@
         <h1>Holden2000 -Testing</h1>
         
         <?php
-            echo "Hello World!";
+            echo "Hello World!";?>
+<br/>
+        <?php
             echo "something else";
-            ?>
+        ?>
 
         <div class="inline-Block">
             <h2>Maps</h2>
