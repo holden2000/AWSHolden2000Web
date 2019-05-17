@@ -111,7 +111,7 @@ function printTime() {
     Ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
 
     Ctx4.font = "bold 36px arial";
-    Ctx4.fillStyle = "#f00";
+    Ctx4.fillStyle = "#a0f";
     Ctx4.textAlign = "center";
     Ctx4.fillText(hour2, canvas4.width / 2, canvas4.height - 15 );
 }

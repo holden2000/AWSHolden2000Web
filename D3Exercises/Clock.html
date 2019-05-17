@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,5 +35,54 @@
 
 
     </script>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        
+        //var url = "https://api.nasa.gov/planetary/apod?date=2019-05-03&hd=True&api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo";
+        var url = "https://api.nasa.gov/planetary/apod?hd=True&api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo";
+        
+        
+        $.ajax({
+               url: url,
+               success: function (result) {
+               if ("copyright" in result) {
+               $("#copyright").text("Image Credits: " + result.copyright);
+               }
+               else {
+               $("#copyright").text("Image Credits: " + "Public Domain");
+               }
+               
+               if (result.media_type == "video") {
+               $("#apod_img_id").css("display", "none");
+               $("#apod_vid_id").attr("src", result.url);
+               }
+               else {
+               $("#apod_vid_id").css("display", "none");
+               $("#apod_img_id").attr("src", result.url);
+               }
+               $("#reqObject").text(url);
+               $("#returnObject").text(JSON.stringify(result, null, 4));
+               $("#apod_explaination").text(result.explanation);
+               $("#apod_title").text(result.title);
+               }
+               });
+               
+        </script>
+    
+    <h2>Astronomy Picture of the Day</h2>
+    <img id="apod_img_id" />
+    
+    <iframe id="apod_vid_id" type="text/html" width="1040" height="685" frameborder="0"></iframe>
+    <p id="copyright"></p>
+    
+    <h3 id="apod_title"></h3>
+    <p id="apod_explaination"></p>
+    <br />
+    <b>API URL:</b>
+    <pre id="reqObject"></pre>
+    <br />
+    <b>Return Object:</b>
+    <pre id="returnObject"></pre>
 </body>
 </html>
