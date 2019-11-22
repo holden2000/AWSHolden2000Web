@@ -19,16 +19,16 @@
 		5D605921204B2E2100C3CF06 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 		5D7F99F920780CFA002D0602 /* index.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = index.php; sourceTree = "<group>"; };
 		5D7F99FA20780FD1002D0602 /* HelloWorld.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; path = HelloWorld.php; sourceTree = "<group>"; };
-		5DCAB8B6226AA8E200BF0D5E /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		5DD44240204B3F3900228CC6 /* BubbleTutorial */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BubbleTutorial; sourceTree = "<group>"; };
 		5DD44241204B415400228CC6 /* Graphs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphs; sourceTree = "<group>"; };
+		5DDFE7E4236E31D6003C9FC7 /* Collision */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Collision; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		5D605911204B206500C3CF06 = {
 			isa = PBXGroup;
 			children = (
-				5DCAB8B6226AA8E200BF0D5E /* package.json */,
+				5DDFE7E4236E31D6003C9FC7 /* Collision */,
 				5DD44240204B3F3900228CC6 /* BubbleTutorial */,
 				5D095848204B34ED0006F6A7 /* D3Exercises */,
 				5DD44241204B415400228CC6 /* Graphs */,
