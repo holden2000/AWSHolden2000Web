@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		5D095848204B34ED0006F6A7 /* D3Exercises */ = {isa = PBXFileReference; lastKnownFileType = folder; path = D3Exercises; sourceTree = "<group>"; };
+		5D0D8210244219DD00399CAE /* error.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
 		5D605918204B20ED00C3CF06 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		5D605919204B20ED00C3CF06 /* META-INF */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "META-INF"; sourceTree = "<group>"; };
 		5D60591A204B20ED00C3CF06 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
@@ -28,6 +29,7 @@
 		5D605911204B206500C3CF06 = {
 			isa = PBXGroup;
 			children = (
+				5D0D8210244219DD00399CAE /* error.html */,
 				5DDFE7E4236E31D6003C9FC7 /* Collision */,
 				5DD44240204B3F3900228CC6 /* BubbleTutorial */,
 				5D095848204B34ED0006F6A7 /* D3Exercises */,
