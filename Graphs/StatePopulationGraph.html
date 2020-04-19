@@ -45,7 +45,8 @@ d3.json('Data/state-populations.json', d => {
 
         //draws the lines
   chart.selectAll()
-    .data(states).enter()
+    .data(states)
+    .enter()
     .append('path')
     .attr('fill', 'none')
     .attr('stroke', d => d.color)
